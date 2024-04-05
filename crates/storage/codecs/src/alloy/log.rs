@@ -103,8 +103,8 @@ mod tests {
         };
 
         let mut buf = Vec::<u8>::new();
-        let len = log.clone().to_compact(&mut buf);
-        let (decoded, _) = Log::from_compact(&buf, len);
+        let len = log.to_compact(&mut buf);
+        let (_decoded, _) = Log::from_compact(&buf, len);
         let output_value = vec![
             119, 170, 51, 124, 211, 66, 106, 202, 221, 218, 204, 79, 160, 211, 30, 196, 166, 25,
             253, 55, 5, 134, 200, 135, 245, 214, 141, 18, 19, 219, 57, 115, 226, 103, 16, 240, 224,
