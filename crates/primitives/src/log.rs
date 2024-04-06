@@ -66,6 +66,7 @@ mod tests {
         topics: Vec<B256>,
         address: Address,
         data: Bytes,
+        decoded: Vec<u8>
     }
 
     proptest! {
@@ -86,6 +87,7 @@ mod tests {
                 topics: log.topics.clone(),
                 address: log.address.clone(),
                 data: log.data.clone(),
+                decoded: buf
             };
             to_writer_pretty(&mut file, &json).expect("Unable to write to file");
 
