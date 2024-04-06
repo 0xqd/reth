@@ -51,3 +51,46 @@ where
     }
     bloom
 }
+
+#[cfg(test)]
+mod tests {
+    use std::io::Write;
+    use super::*;
+    use alloy_primitives::LogData;
+    use proptest::proptest;
+    use serde::Serialize;
+    use serde_json::{to_writer_pretty};
+
+    #[derive(Serialize)]
+    struct JsonOutput {
+        topics: Vec<B256>,
+        address: Address,
+        data: Bytes,
+    }
+
+    proptest! {
+        #[test]
+        fn roundtrip(log: Log) {
+            let mut buf = Vec::<u8>::new();
+            log.clone().to_compact(&mut buf);
+            let (decoded, _) = Log::from_compact(&buf, buf.len());
+
+            // create  file /tmp/log_test.json, create or append
+            let mut file = std::fs::OpenOptions::new()
+                .create(true)
+                .append(true)
+                .open("/tmp/log_test.json")
+                .expect("Unable to open file");
+
+            let json = JsonOutput {
+                topics: log.topics.clone(),
+                address: log.address.clone(),
+                data: log.data.clone(),
+            };
+            to_writer_pretty(&mut file, &json).expect("Unable to write to file");
+
+            assert_eq!(log, decoded);
+        }
+    }
+
+}
