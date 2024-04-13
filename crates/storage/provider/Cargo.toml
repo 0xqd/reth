@@ -34,6 +34,9 @@ tracing.workspace = true
 reth-metrics.workspace = true
 metrics.workspace = true
 
+# alloy
+alloy-primitives.workspace = true
+
 # misc
 auto_impl = "1.0"
 itertools.workspace = true

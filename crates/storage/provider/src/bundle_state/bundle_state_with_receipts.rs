@@ -1,4 +1,5 @@
 use crate::{providers::StaticFileProviderRWRefMut, StateChanges, StateReverts};
+use alloy_primitives::Log;
 use reth_db::{
     cursor::{DbCursorRO, DbCursorRW},
     tables,
@@ -8,7 +9,7 @@ use reth_interfaces::provider::{ProviderError, ProviderResult};
 use reth_primitives::{
     logs_bloom,
     revm::compat::{into_reth_acc, into_revm_acc},
-    Account, Address, BlockNumber, Bloom, Bytecode, Log, Receipt, Receipts, StaticFileSegment,
+    Account, Address, BlockNumber, Bloom, Bytecode, Receipt, Receipts, StaticFileSegment,
     StorageEntry, B256, U256,
 };
 use reth_trie::HashedPostState;

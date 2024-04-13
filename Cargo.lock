@@ -6492,6 +6492,7 @@ dependencies = [
 name = "reth-eth-wire-types"
 version = "0.2.0-beta.5"
 dependencies = [
+ "alloy-primitives",
  "alloy-rlp",
  "arbitrary",
  "async-stream",
@@ -7084,6 +7085,7 @@ dependencies = [
 name = "reth-provider"
 version = "0.2.0-beta.5"
 dependencies = [
+ "alloy-primitives",
  "alloy-rlp",
  "assert_matches",
  "auto_impl",
